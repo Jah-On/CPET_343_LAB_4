@@ -57,7 +57,12 @@ if ($LASTEXITCODE -ne 0){
 }
 
 # Get all VHDL files and consolidate to relative paths.
-$vhdlFiles = (Get-ChildItem -Path .\$targetDirectory\*.vhd -Recurse | Resolve-Path -Relative | Sort-Object -Property Length )
+$vhdlFiles = (
+    Get-ChildItem -Path .\$targetDirectory\*.vhd -Recurse | 
+    Select-Object -ExpandProperty FullName |
+    Sort-Object -Property { ($_.Split('\').Count) } -Descending |
+    Resolve-Path -Relative
+)
 
 # Get the first matching test bench with the "_tb" pattern.
 $testBench = (Get-ChildItem -Path .\$targetDirectory\testbenches\*_tb.vhd | Select-Object -First 1 -ExpandProperty BaseName )

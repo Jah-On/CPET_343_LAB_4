@@ -10,7 +10,6 @@ and functionality is verified manually.
 #>
 
 $targetDirectory = "src"
-
 function BlockExit {
     Write-Host ""
     Write-Host "Press Enter to close or close the terminal..." -NoNewline
@@ -49,7 +48,12 @@ if (-not (Test-Path -Path "$currentLocation\$targetDirectory" -PathType Containe
 }
 
 # Get all VHDL files and join them with spaces
-$vhdlFiles = (Get-ChildItem -Path .\$targetDirectory\*.vhd -Recurse | Resolve-Path -Relative | Sort-Object -Property Length )
+$vhdlFiles = (
+    Get-ChildItem -Path .\$targetDirectory\*.vhd -Recurse | 
+    Select-Object -ExpandProperty FullName |
+    Sort-Object -Property { ($_.Split('\').Count) } -Descending |
+    Resolve-Path -Relative
+)
 
 # Get the test bench file name without the .vhd extension
 $testBench = (Get-ChildItem -Path .\$targetDirectory\testbenches\*_tb.vhd | Select-Object -First 1 -ExpandProperty BaseName )
