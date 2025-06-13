@@ -83,7 +83,7 @@ begin
         port map (
             enable        => '1',
             bcd           => last_sum,
-            seven_seg_out => open
+            seven_seg_out => hex0
         );
 
 end architecture mafs;
