@@ -49,9 +49,18 @@ if (-not (Test-Path -Path "$currentLocation\$targetDirectory" -PathType Containe
 
 # Get all VHDL files and join them with spaces
 $vhdlFiles = (
-    Get-ChildItem -Path .\$targetDirectory\*.vhd -Recurse | 
+    Get-ChildItem -Path .\$targetDirectory\*.vhd -Recurse |
     Select-Object -ExpandProperty FullName |
-    Sort-Object -Property { ($_.Split('\').Count) } -Descending |
+    Sort-Object -Property { 
+        $pathParts = $_.Split('\')
+        $depth = $pathParts.Count
+        # Assign a very high value to testbenches to make it sort last
+        if ($pathParts -contains 'testbenches') {
+            [int]::MaxValue
+        } else {
+            $depth
+        }
+    }, -Descending |
     Resolve-Path -Relative
 )
 
