@@ -15,6 +15,7 @@ begin
     begin
         if (enable) then
             case bcd is
+                when "0000" => seven_seg_out <= "1000000";
                 when "0001" => seven_seg_out <= "1111001";
                 when "0010" => seven_seg_out <= "0100100";
                 when "0011" => seven_seg_out <= "0110000";
@@ -24,7 +25,7 @@ begin
                 when "0111" => seven_seg_out <= "1111000";
                 when "1000" => seven_seg_out <= "0000000";
                 when "1001" => seven_seg_out <= "0011000";
-                when others => seven_seg_out <= "1000000";
+                when others => seven_seg_out <= "1111111";
             end case;
         end if;
     end process proc_name;
