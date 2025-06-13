@@ -16,9 +16,8 @@ radix define States {
 }
 
 # Add wave lines here...  i.e. add wave -noupdate -color #eb34eb /tb/led_output
-add wave -noupdate /ssd_bench/uut/enable
-add wave -noupdate /ssd_bench/uut/bcd
-add wave -radix States -noupdate /ssd_bench/uut/seven_seg_out
+add wave -noupdate /top_level_bench/uut/clock_50
+add wave -radix States -noupdate /top_level_bench/uut/hex0
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50 ns} 0}
