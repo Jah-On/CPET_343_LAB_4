@@ -22,5 +22,15 @@ set_global_assignment -name VHDL_FILE ../src/generic_adder_beh.vhd
 set_global_assignment -name VHDL_FILE ../src/seven_seg.vhd
 set_global_assignment -name VHDL_FILE ../src/display_counter.vhd
 
+# 3] set your pin constraints here
+set_location_assignment PIN_AF14 -to clock_50
+set_location_assignment PIN_AE26 -to HEX0[0]
+set_location_assignment PIN_AE27 -to HEX0[1]
+set_location_assignment PIN_AE28 -to HEX0[2]
+set_location_assignment PIN_AG27 -to HEX0[3]
+set_location_assignment PIN_AF28 -to HEX0[4]
+set_location_assignment PIN_AG28 -to HEX0[5]
+set_location_assignment PIN_AH28 -to HEX0[6]
+
 execute_flow -compile
 project_close
