@@ -64,6 +64,9 @@ begin
     end process add;
 
     de1 : generic_counter 
+        generic map (
+            max_count => 49999999
+        )
         port map (
             clk    => clock_50,
             output => enable,
